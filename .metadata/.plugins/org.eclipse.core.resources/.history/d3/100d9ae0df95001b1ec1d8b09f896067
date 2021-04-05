@@ -1,0 +1,50 @@
+package dataSendReceive;
+
+import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+/**
+ * 1) 클래스명 : Server.java
+ * 2) 서버주소 : localhost 또는 127.0.0.1
+ * 3) 포트번호 : 1234
+ * 4) 클라이언트로부터 데이터를 전달받아 콘솔 화면에 출력한다.
+ * 	    예시)
+ * 	    클라이언트(127.0.0.1)로부터 "안녕하세요"데이터를 받았습니다.
+ */
+
+
+public class Server {
+
+	public static void main(String[] args) {
+		
+		ServerSocket server = null;
+		
+		try {
+			server = new ServerSocket();
+			server.bind(new InetSocketAddress("localhost", 1234));
+			System.out.println("서버 실행중!");
+			
+			Socket client = server.accept();
+			InetSocketAddress isa = (InetSocketAddress)client.getRemoteSocketAddress();
+			System.out.println("접속된 클라이언트 : [" + isa.getHostName() + "]");
+			
+			InputStream is = client.getInputStream();
+			byte[] b = new byte[1024];
+			int length = is.read(b);
+			String fromClient = new String(b, 0, length, "UTF-8");
+			System.out.println(isa.getHostName() + "로부터 " + fromClient + "데이터를 받았습니다.");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(!server.isClosed()) server.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}

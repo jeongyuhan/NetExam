@@ -1,0 +1,55 @@
+package dataSendReceive;
+
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.Scanner;
+
+/**
+ * 1) 클래스명 : Client.java
+ * 2) 접속서버 : Server.java
+ * 3) Scanner 클래스를 이용해 문자열을 입력 받아 서버로 전송한다.
+ * 	    예시)
+ *    서버에게 전송할 메시지를 입력하세요>>> 안녕하세요
+ *    서버(127.0.0.1)로 "안녕하세요" 데이터를 전송했습니다.
+ */
+
+public class Client {
+
+	public static void main(String[] args) {
+		
+		Socket client = null;
+		Scanner sc = null;
+		
+		try {
+			client = new Socket();
+			client.connect(new InetSocketAddress("localhost", 1234));
+			System.out.println("서버로 접속되었습니다.");
+			
+			sc = new Scanner(System.in);
+
+			OutputStream os = client.getOutputStream();
+			System.out.print("서버에게 전송할 메시지를 입력하세요>>>");
+			
+			String toServer = sc.nextLine();
+			os.write(toServer.getBytes("UTF-8"));
+			os.flush();
+			if(toServer != null) {
+				System.out.println("서버(" + client.getLocalAddress() + ")로 \"" + toServer + "\" 데이터를 전송했습니다." );
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(!client.isClosed()) client.close();				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		
+		
+		
+	}
+
+}

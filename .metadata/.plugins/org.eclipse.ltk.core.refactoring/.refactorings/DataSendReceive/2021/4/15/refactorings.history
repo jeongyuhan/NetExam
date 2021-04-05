@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;dataSendReceive.Send&apos; to &apos;Server&apos;&#x0D;&#x0A;- Original project: &apos;DataSendReceive&apos;&#x0D;&#x0A;- Original element: &apos;dataSendReceive.Send&apos;&#x0D;&#x0A;- Renamed element: &apos;dataSendReceive.Server&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Send&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;dataSendReceive{Send.java[Send" matchStrategy="1" name="Server" qualified="false" references="true" similarDeclarations="false" stamp="1617606430572" textual="false" version="1.0"/>
+</session>
